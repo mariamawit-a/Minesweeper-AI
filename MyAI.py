@@ -15,7 +15,7 @@
 from AI import AI
 from Action import Action
 
-
+##
 class MyAI( AI ):
 
 	def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
@@ -28,7 +28,7 @@ class MyAI( AI ):
 		#							YOUR CODE ENDS							   #
 		########################################################################
 
-		
+
 	def getAction(self, number: int) -> "Action Object":
 
 		########################################################################
