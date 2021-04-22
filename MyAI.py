@@ -15,7 +15,7 @@
 from AI import AI
 from Action import Action
 
-##
+## I made changes
 class MyAI( AI ):
 
 	def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
