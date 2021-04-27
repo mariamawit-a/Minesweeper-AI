@@ -30,6 +30,13 @@
 from AI import AI
 from Action import Action
 
+
+#each node in array is either:
+#	-2: bomb
+#	-1: covered
+#	 0: uncovered, no adjacent bomb
+#  #>0: # of adjacent bombs
+
 class MyAI( AI ):
 
 	def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
