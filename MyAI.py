@@ -50,6 +50,10 @@ class MyAI( AI ):
 		########################################################################
 
 
+	#pulls from either frontier or (if frontier is empty) minefield
+	#uncovers that tile, and then adds adjacent covered tiles (that are not already in frontier or minefield) into them
+	#	as appropriate
+	#modifies the data for the tile in the 2d array
 	def getAction(self, number: int) -> "Action Object":
 
 		########################################################################
