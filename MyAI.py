@@ -12,7 +12,20 @@
 #				- DO NOT MAKE CHANGES TO THIS FILE.
 # ==============================CS-199==================================
 
-#confirm works? yes
+# My suggestions on how to do this:
+# 	Make a 2d array of custom data structures, where each structure has the current state of the node it represents and
+# 	pointers to the nodes adjacent to it. By default, all nodes are unknown (covered) except for that first given node.
+#
+# 	There should also be a list containing pointers to all the nodes on the "frontier"; that is to say, to all
+# 	unrevealed nodes adjacent to a revealed node. These are the nodes to be acted on first. One thing to mention is that
+# 	we should make it so nodes that become flagged are removed from this list, and put into a seperate one. The flagged
+# 	nodes list should be modified as we add flagged nodes and remove flags from nodes.
+#
+# 	Whenever a numbered node is encountered, immediately flag all covered adjacent nodes. This way can uncover as much
+# 	of the board as possible in complete safety before we have to start taking chances on flagged nodes. Of course, the
+# 	process of mapping the rest of the board should also allow us to remove flags from nodes in the process, shrinking
+# 	this list and increasing the size of the frontier list.
+#
 
 from AI import AI
 from Action import Action
