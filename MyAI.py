@@ -26,7 +26,7 @@
 # 	process of mapping the rest of the board should also allow us to remove flags from nodes in the process, shrinking
 # 	this list and increasing the size of the frontier list.
 #
-
+ 
 from AI import AI
 from Action import Action
 
