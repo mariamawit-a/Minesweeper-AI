@@ -93,16 +93,17 @@ class MyAI( AI ):
 		#							YOUR CODE ENDS							   #
 		########################################################################
 
-<<<<<<< Updated upstream
 
 	def outOfBound(self, x: int, y: int):
 		if x < 0 or x > self.rowDimension or y < 0 or y > self.colDimension:
 			return True
 		return False
-=======
-        while !(self.frontier.empty()):
-            tile = pop(self.frontier)
-            tilex = tile//10;
-            tiley = tile%10;
-            return Action(AI.Action.UNCOVER, startX, st)
->>>>>>> Stashed changes
+
+
+
+
+#	while !(self.frontier.empty()):
+#            tile = pop(self.frontier)
+#            tilex = tile//10;
+#            tiley = tile%10;
+#            return Action(AI.Action.UNCOVER, startX, st)
