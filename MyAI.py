@@ -48,7 +48,17 @@ class MyAI( AI ):
 		########################################################################
 		#							YOUR CODE BEGINS						   #
 		########################################################################
-		pass
+		self.rowDimension = rowDimension
+        self.colDimension = colDimension
+        self.totalMines = totalMines
+        self.startX = startX
+        self.startY = startY
+        self.X = startX
+        self.Y = startY
+        self.board = [[-1 for i in range(rowDimension)] for j in range(colDimension)]
+        self.move = 0
+        self.frontier = []
+        self.minefield = []
 		########################################################################
 		#							YOUR CODE ENDS							   #
 		########################################################################
@@ -60,16 +70,39 @@ class MyAI( AI ):
 	#modifies the data for the tile in the 2d array
 	def getAction(self, number: int) -> "Action Object":
 
-		########################################################################
-		#							YOUR CODE BEGINS						   #
-		########################################################################
+		int tile;
+        int tilex;
+        int tiley;
+        
+        if self.move == 0
+            self.board[startY][startX] = number;
+        else
+            self.board[Y][X] = number;
+            
+        if number==0:
+            #add left
+            if self.X>0:
+                tile =
+            
+            if
+        return Action(AI.Action.UNCOVER, startX, st)
+
 		return Action(AI.Action.LEAVE)
+  
 		########################################################################
 		#							YOUR CODE ENDS							   #
 		########################################################################
 
+<<<<<<< Updated upstream
 
 	def outOfBound(self, x: int, y: int):
 		if x < 0 or x > self.rowDimension or y < 0 or y > self.colDimension:
 			return True
 		return False
+=======
+        while !(self.frontier.empty()):
+            tile = pop(self.frontier)
+            tilex = tile//10;
+            tiley = tile%10;
+            return Action(AI.Action.UNCOVER, startX, st)
+>>>>>>> Stashed changes
