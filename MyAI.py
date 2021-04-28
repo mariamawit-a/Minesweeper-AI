@@ -67,3 +67,9 @@ class MyAI( AI ):
 		########################################################################
 		#							YOUR CODE ENDS							   #
 		########################################################################
+
+
+	def outOfBound(self, x: int, y: int):
+		if x < 0 or x > self.rowDimension or y < 0 or y > self.colDimension:
+			return True
+		return False
