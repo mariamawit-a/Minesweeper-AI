@@ -101,9 +101,9 @@ class MyAI( AI ):
 
 
 
-
 #	while !(self.frontier.empty()):
 #            tile = pop(self.frontier)
 #            tilex = tile//10;
 #            tiley = tile%10;
 #            return Action(AI.Action.UNCOVER, startX, st)
+
