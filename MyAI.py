@@ -37,6 +37,10 @@ from Action import Action
 #	 0: uncovered, no adjacent bomb
 #  #>0: # of adjacent bombs
 
+
+#condition to win is when frontier is empty and minefield has the same number of element in it as there are bombs.
+#uncover every square that is not a bomb.
+
 class MyAI( AI ):
 
 	def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
