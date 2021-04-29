@@ -74,17 +74,17 @@ class MyAI( AI ):
         int tilex;
         int tiley;
         
-        if self.move == 0
-            self.board[startY][startX] = number;
+        if self.move == 0:
+            self.board[startY][startX] = number
         else
-            self.board[Y][X] = number;
+            self.board[Y][X] = number
             
         if number==0:
             #add left
-            if self.X>0:
+            #if self.X>0:
                 tile =
             
-            if
+            #if
         return Action(AI.Action.UNCOVER, startX, st)
 
 		return Action(AI.Action.LEAVE)
