@@ -73,53 +73,9 @@ class MyAI( AI ):
             self.board[Y][X] = number;
 
         if number==0:
+			addQueue(self.frontier, X, Y)
             #add top left
-            if !outOfBound(self.X-1, self.Y+1):
-                tile = (self.X-1)*10+(self.Y+1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
 
-            #add middle left
-            if !outOfBound(self.X-1, self.Y):
-                tile = (self.X-1)*10+(self.Y)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add bottom left
-            if !outOfBound(self.X-1, self.Y-1):
-                tile = (self.X-1)*10+(self.Y-1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add center top
-            if !outOfBound(self.X, self.Y+1):
-                tile = (self.X)*10+(self.Y+1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add center bottom
-            if !outOfBound(self.X, self.Y-1):
-                tile = (self.X)*10+(self.Y-1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add top right
-            if !outOfBound(self.X+1, self.Y+1):
-                tile = (self.X+1)*10+(self.Y+1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add middle right
-            if !outOfBound(self.X+1, self.Y):
-                tile = (self.X+1)*10+(self.Y)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add bottom right
-            if !outOfBound(self.X+1, self.Y-1):
-                tile = (self.X+1)*10+(self.Y-1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
 
         return Action(AI.Action.UNCOVER, startX, st)
 
@@ -139,3 +95,53 @@ class MyAI( AI ):
         tile = x*10+y
         if tile not in self.frontier:
             self.frontier.append(tile)
+
+	def addQueue(self, arr, X, Y):
+		if !outOfBound(self.X-1, self.Y+1):
+			tile = (self.X - 1) * 10 + (self.Y + 1)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+		# add middle left
+		if !outOfBound(self.X-1, self.Y):
+			tile = (self.X - 1) * 10 + (self.Y)
+			if tile not in self.arr:
+				self.frontier.append(tile)
+
+		# add bottom left
+		if !outOfBound(self.X-1, self.Y-1):
+			tile = (self.X - 1) * 10 + (self.Y - 1)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+		# add center top
+		if !outOfBound(self.X, self.Y+1):
+			tile = (self.X) * 10 + (self.Y + 1)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+		# add center bottom
+		if !outOfBound(self.X, self.Y-1):
+			tile = (self.X) * 10 + (self.Y - 1)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+		# add top right
+		if !outOfBound(self.X+1, self.Y+1):
+			tile = (self.X + 1) * 10 + (self.Y + 1)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+		# add middle right
+		if !outOfBound(self.X+1, self.Y):
+			tile = (self.X + 1) * 10 + (self.Y)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+		# add bottom right
+		if !outOfBound(self.X+1, self.Y-1):
+			tile = (self.X + 1) * 10 + (self.Y - 1)
+			if tile not in self.arr:
+				self.arr.append(tile)
+
+
