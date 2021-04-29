@@ -30,7 +30,6 @@
 from AI import AI
 from Action import Action
 
-
 #each node in array is either:
 #	-2: bomb
 #	-1: covered
@@ -59,9 +58,7 @@ class MyAI( AI ):
         self.move = 0
         self.frontier = []
         self.minefield = []
-		########################################################################
-		#							YOUR CODE ENDS							   #
-		########################################################################
+
 
 
 	#pulls from either frontier or (if frontier is empty) minefield
@@ -70,39 +67,75 @@ class MyAI( AI ):
 	#modifies the data for the tile in the 2d array
 	def getAction(self, number: int) -> "Action Object":
 
-		int tile;
-        int tilex;
-        int tiley;
-        
         if self.move == 0
             self.board[startY][startX] = number;
         else
             self.board[Y][X] = number;
-            
+
         if number==0:
-            #add left
-            if self.X>0:
-                tile =
-            
-            if
+            #add top left
+            if !outOfBound(self.X-1, self.Y+1):
+                tile = (self.X-1)*10+(self.Y+1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add middle left
+            if !outOfBound(self.X-1, self.Y):
+                tile = (self.X-1)*10+(self.Y)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add bottom left
+            if !outOfBound(self.X-1, self.Y-1):
+                tile = (self.X-1)*10+(self.Y-1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add center top
+            if !outOfBound(self.X, self.Y+1):
+                tile = (self.X)*10+(self.Y+1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add center bottom
+            if !outOfBound(self.X, self.Y-1):
+                tile = (self.X)*10+(self.Y-1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add top right
+            if !outOfBound(self.X+1, self.Y+1):
+                tile = (self.X+1)*10+(self.Y+1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add middle right
+            if !outOfBound(self.X+1, self.Y):
+                tile = (self.X+1)*10+(self.Y)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add bottom right
+            if !outOfBound(self.X+1, self.Y-1):
+                tile = (self.X+1)*10+(self.Y-1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
         return Action(AI.Action.UNCOVER, startX, st)
 
 		return Action(AI.Action.LEAVE)
-  
+
 		########################################################################
 		#							YOUR CODE ENDS							   #
 		########################################################################
 
-<<<<<<< Updated upstream
 
-	def outOfBound(self, x: int, y: int):
-		if x < 0 or x > self.rowDimension or y < 0 or y > self.colDimension:
-			return True
-		return False
-=======
-        while !(self.frontier.empty()):
-            tile = pop(self.frontier)
-            tilex = tile//10;
-            tiley = tile%10;
-            return Action(AI.Action.UNCOVER, startX, st)
->>>>>>> Stashed changes
+    def outOfBound(self, x: int, y: int) -> "bool":
+        if x < 0 or x >= self.colDimension or y < 0 or y >= self.rowDimension:
+            return True
+        return False
+
+    def addFrontier(self, x: int, y: int):
+        tile = x*10+y
+        if tile not in self.frontier:
+            self.frontier.append(tile)
