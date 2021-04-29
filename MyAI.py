@@ -70,15 +70,15 @@ class MyAI( AI ):
 	#modifies the data for the tile in the 2d array
 	def getAction(self, number: int) -> "Action Object":
 
-		int tile;
-        int tilex;
-        int tiley;
+		int tile
+        int tilex
+        int tiley
 
 		#if move is 0 (if it is the first move) add the starting uncovered square to the board and add all of its
 		#adjacent squares to either frontier or minefield as appropriate.
         if self.move is 0:
             self.board[startY][startX] = number
-        else #no need for else since the above is only conditional on it being the first move
+		else: #no need for else since the above is only conditional on it being the first move
             self.board[Y][X] = number
 
 		#now, pull something out of frontier (if it is not empty) or minefield (if frontier is empty).
