@@ -73,15 +73,22 @@ class MyAI( AI ):
 		int tile;
         int tilex;
         int tiley;
-        
+
+		#if move is 0 (if it is the first move) add the starting uncovered square to the board and add all of its
+		#adjacent squares to either frontier or minefield as appropriate.
         if self.move is 0:
             self.board[startY][startX] = number
-        else
+        else #no need for else since the above is only conditional on it being the first move
             self.board[Y][X] = number
-            
+
+		#now, pull something out of frontier (if it is not empty) or minefield (if frontier is empty).
+		#if it pulls out of minefield, we will need to pull out the item with the smallest reference counter (the
+		#item in minefield with the smallest number of numbered adjacent squares.
+		#Uncover that square (both in the game and self.board), and add all of that square's adjacent covered squares
+		#into either frontier or minefield as appropriate.
         if self.board[Y][X].number is 0:
             #add left
-			
+
             #if self.X>0:
             tile =
             
