@@ -42,12 +42,9 @@ from Action import Action
 
 class MyAI( AI ):
 
-	def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
+    def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
 
-		########################################################################
-		#							YOUR CODE BEGINS						   #
-		########################################################################
-		self.rowDimension = rowDimension
+        self.rowDimension = rowDimension
         self.colDimension = colDimension
         self.totalMines = totalMines
         self.startX = startX
@@ -83,6 +80,56 @@ class MyAI( AI ):
             if !outOfBound(self.X-1, self.Y):
                 tile = (self.X-1)*10+(self.Y)
                 if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add bottom left
+            if !outOfBound(self.X-1, self.Y-1):
+                tile = (self.X-1)*10+(self.Y-1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add center top
+            if !outOfBound(self.X, self.Y+1):
+                tile = (self.X)*10+(self.Y+1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add center bottom
+            if !outOfBound(self.X, self.Y-1):
+                tile = (self.X)*10+(self.Y-1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add top right
+            if !outOfBound(self.X+1, self.Y+1):
+                tile = (self.X+1)*10+(self.Y+1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add middle right
+            if !outOfBound(self.X+1, self.Y):
+                tile = (self.X+1)*10+(self.Y)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+            #add bottom right
+            if !outOfBound(self.X+1, self.Y-1):
+                tile = (self.X+1)*10+(self.Y-1)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+
+        if number==1:
+
+            #add top left
+            if !outOfBound(self.X-1, self.Y+1):
+                tile = (self.X-1)*10+(self.Y+1)
+                if tile not in self.frontier and tile not in self.minefield:
+                    self.frontier.append(tile)
+
+            #add middle left
+            if !outOfBound(self.X-1, self.Y):
+                tile = (self.X-1)*10+(self.Y)
+                if tile not in self.frontier and tile not in self:
                     self.frontier.append(tile)
 
             #add bottom left
