@@ -74,7 +74,8 @@ class MyAI( AI ):
 
         if number==0:
 			addQueue(self.frontier, X, Y)
-
+		elif number > 0:
+			addQueue(self.minefield, X, Y)
 
 
         return Action(AI.Action.UNCOVER, startX, st)
