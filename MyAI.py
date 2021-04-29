@@ -86,17 +86,7 @@ class MyAI( AI ):
 		########################################################################
 
 
-    def outOfBound(self, x: int, y: int) -> "bool":
-        if x < 0 or x >= self.colDimension or y < 0 or y >= self.rowDimension:
-            return True
-        return False
-
-    def addFrontier(self, x: int, y: int):
-        tile = x*10+y
-        if tile not in self.frontier:
-            self.frontier.append(tile)
-
-	def addQueue(self, arr, X, Y):
+	def addQueue(self, arr, X: int, Y: int):
 		if !outOfBound(self.X-1, self.Y+1):
 			tile = (self.X - 1) * 10 + (self.Y + 1)
 			if tile not in self.arr:
@@ -143,5 +133,17 @@ class MyAI( AI ):
 			tile = (self.X + 1) * 10 + (self.Y - 1)
 			if tile not in self.arr:
 				self.arr.append(tile)
+
+
+	def outOfBound(self, x: int, y: int) -> "bool":
+        if x < 0 or x >= self.colDimension or y < 0 or y >= self.rowDimension:
+            return True
+        return False
+
+    def addFrontier(self, x: int, y: int):
+        tile = x*10+y
+        if tile not in self.frontier:
+            self.frontier.append(tile)
+
 
 
