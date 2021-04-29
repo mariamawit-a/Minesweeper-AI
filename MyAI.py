@@ -74,12 +74,12 @@ class MyAI( AI ):
 
         if number==0:
 			addQueue(self.frontier, X, Y)
-            #add top left
+
 
 
         return Action(AI.Action.UNCOVER, startX, st)
 
-		return Action(AI.Action.LEAVE)
+		#return Action(AI.Action.LEAVE)
 
 		########################################################################
 		#							YOUR CODE ENDS							   #
@@ -87,6 +87,8 @@ class MyAI( AI ):
 
 
 	def addQueue(self, arr, X: int, Y: int):
+
+		# add top left
 		if !outOfBound(self.X-1, self.Y+1):
 			tile = (self.X - 1) * 10 + (self.Y + 1)
 			if tile not in self.arr:
