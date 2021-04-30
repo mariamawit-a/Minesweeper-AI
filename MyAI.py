@@ -220,7 +220,7 @@ class MyAI( AI ):
         minOnes = 9
         minItem = NULL
         for item in self.minefield:
-            if numOnes(item) < minOnes
+            if numOnes(item) < minOnes:
                 minOnes = numOnes(item)
                 minItem = item
         self.minefield.remove(minItem)
@@ -231,14 +231,11 @@ class MyAI( AI ):
         tileX = item//10
         tileY = item%10
 
-        for ones in self.uncoveredOnes
+        for ones in self.uncoveredOnes:
             onesTileX = ones // 10
             onesTileY = ones % 10
-
             thisX = tileX - onesTileX
             thisY = tileY - onesTileY
-
             if -1<=thisX<=1 and -1<=thisY<=1:
                 counter += 1
-
         return counter
