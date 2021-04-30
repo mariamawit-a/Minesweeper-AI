@@ -53,6 +53,8 @@ class MyAI( AI ):
         self.Y = startY
         self.board = [[-1 for i in range(rowDimension)] for j in range(colDimension)]
         self.move = 0
+        self.uncovered = []
+        self.uncoveredOnes = []
         self.frontier = []
         self.minefield = []
 
@@ -64,136 +66,179 @@ class MyAI( AI ):
 	#modifies the data for the tile in the 2d array
 	def getAction(self, number: int) -> "Action Object":
 
-        if self.move == 0
-            self.board[startY][startX] = number;
-        else
+        if self.move == 0:
+            tile = self.startX * 10 + self.startY
+            self.uncovered.append(tile)
+            self.board[self.startX][self.startY] = number;
+        else:
             self.board[Y][X] = number;
+            if number > 0:
+                tile = self.X * 10 + self.Y
+                self.uncoveredOnes.append(tile)
 
         if number==0:
-			addQueue(self.frontier, X, Y)
+		    addQueue(0, self.X, self.Y)
 		elif number > 0:
-			addQueue(self.minefield, X, Y)
+			addQueue(1, self.X, self.Y)
 
-
-        if number==1:
-
-            #add top left
-            if !outOfBound(self.X-1, self.Y+1):
-                tile = (self.X-1)*10+(self.Y+1)
-                if tile not in self.frontier and tile not in self.minefield:
-                    self.frontier.append(tile)
-
-            #add middle left
-            if !outOfBound(self.X-1, self.Y):
-                tile = (self.X-1)*10+(self.Y)
-                if tile not in self.frontier and tile not in self:
-                    self.frontier.append(tile)
-
-            #add bottom left
-            if !outOfBound(self.X-1, self.Y-1):
-                tile = (self.X-1)*10+(self.Y-1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add center top
-            if !outOfBound(self.X, self.Y+1):
-                tile = (self.X)*10+(self.Y+1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add center bottom
-            if !outOfBound(self.X, self.Y-1):
-                tile = (self.X)*10+(self.Y-1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add top right
-            if !outOfBound(self.X+1, self.Y+1):
-                tile = (self.X+1)*10+(self.Y+1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add middle right
-            if !outOfBound(self.X+1, self.Y):
-                tile = (self.X+1)*10+(self.Y)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-            #add bottom right
-            if !outOfBound(self.X+1, self.Y-1):
-                tile = (self.X+1)*10+(self.Y-1)
-                if tile not in self.frontier:
-                    self.frontier.append(tile)
-
-        return Action(AI.Action.UNCOVER, startX, st)
-
-		#return Action(AI.Action.LEAVE)
+        if self.frontier not empty:
+            tile = self.frontier.pop()
+            self.X = tile//10
+            self.Y = tile%10
+            self.uncovered.append(tile)
+            self.move += 1
+            return Action(AI.Action.UNCOVER, self.X, self.Y)
+        else:
+            if len(self.minefield)>self.minefield:
+                tile = minMinefield()
+                #tile = self.minefield.pop()
+                self.X = tile//10
+                self.Y = tile%10
+                self.uncovered.append(tile)
+                self.move += 1
+                return Action(AI.Action.UNCOVER, self.X, self.Y)
+            else:
+                return Action(AI.Action.LEAVE)
 
 		########################################################################
 		#							YOUR CODE ENDS							   #
 		########################################################################
 
-
-	def addQueue(self, arr, X: int, Y: int):
+    # b = 0 => frontier and b = 1 => minefield
+	def addQueue(self, int, b: int, X: int, Y: int):
 
 		# add top left
 		if !outOfBound(self.X-1, self.Y+1):
 			tile = (self.X - 1) * 10 + (self.Y + 1)
-			if tile not in self.arr:
-				self.arr.append(tile)
+            if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add middle left
 		if !outOfBound(self.X-1, self.Y):
 			tile = (self.X - 1) * 10 + (self.Y)
-			if tile not in self.arr:
-				self.frontier.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add bottom left
 		if !outOfBound(self.X-1, self.Y-1):
-			tile = (self.X - 1) * 10 + (self.Y - 1)
-			if tile not in self.arr:
-				self.arr.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add center top
 		if !outOfBound(self.X, self.Y+1):
 			tile = (self.X) * 10 + (self.Y + 1)
-			if tile not in self.arr:
-				self.arr.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add center bottom
 		if !outOfBound(self.X, self.Y-1):
 			tile = (self.X) * 10 + (self.Y - 1)
-			if tile not in self.arr:
-				self.arr.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add top right
 		if !outOfBound(self.X+1, self.Y+1):
 			tile = (self.X + 1) * 10 + (self.Y + 1)
-			if tile not in self.arr:
-				self.arr.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add middle right
 		if !outOfBound(self.X+1, self.Y):
 			tile = (self.X + 1) * 10 + (self.Y)
-			if tile not in self.arr:
-				self.arr.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 		# add bottom right
 		if !outOfBound(self.X+1, self.Y-1):
 			tile = (self.X + 1) * 10 + (self.Y - 1)
-			if tile not in self.arr:
-				self.arr.append(tile)
+			if b == 0:
+                if tile in self.minefield:
+                    self.minefield.remove(tile)
+                if tile not in self.frontier:
+                    self.frontier.append(tile)
+            if b == 1:
+                if tile not in self.frontier:
+                    if tile not in self.minefield:
+                        self.minefield.append(tile)
 
 
-	def outOfBound(self, x: int, y: int) -> "bool":
+	def outOfBound(self, x: int, y: int) -> bool:
         if x < 0 or x >= self.colDimension or y < 0 or y >= self.rowDimension:
             return True
         return False
 
-    def addFrontier(self, x: int, y: int):
-        tile = x*10+y
-        if tile not in self.frontier:
-            self.frontier.append(tile)
+    def minMinefield(self)->int:
+        minOnes = 9
+        minItem = NULL
+        for item in self.minefield:
+            if numOnes(item) < minOnes
+                minOnes = numOnes(item)
+                minItem = item
+        self.minefield.remove(minItem)
+        return minItem
 
+    def numOnes(self, item->int)->int:
+        counter = 0
+        tileX = item//10
+        tileY = item%10
 
+        for ones in self.uncoveredOnes
+            onesTileX = ones // 10
+            onesTileY = ones % 10
 
+            thisX = tileX - onesTileX
+            thisY = tileY - onesTileY
+
+            if -1<=thisX<=1 and -1<=thisY<=1:
+                counter += 1
+
+        return counter
