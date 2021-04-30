@@ -208,11 +208,9 @@ class MyAI(AI):
         for ones in self.uncoveredOnes:
             onesTileX = ones // 10
             onesTileY = ones % 10
-
             thisX = tileX - onesTileX
             thisY = tileY - onesTileY
 
             if -1 <= thisX <= 1 and -1 <= thisY <= 1:
                 counter += 1
-
         return counter
