@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d9c17c33-08d5-45d2-9dd7-4f9f9b9d9227" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyAI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +15,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1904">
-              <caret line="113" column="42" lean-forward="true" selection-start-line="113" selection-start-column="42" selection-end-line="113" selection-end-column="42" />
+            <state relative-caret-position="814">
+              <caret line="86" column="42" lean-forward="true" selection-start-line="86" selection-start-column="42" selection-end-line="86" selection-end-column="42" />
+              <folding>
+                <element signature="e#502#519#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,9 +53,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="182" />
-    <option name="y" value="188" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="204" />
+    <option name="y" value="172" />
     <option name="width" value="1491" />
     <option name="height" value="990" />
   </component>
@@ -129,7 +131,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="182" y="188" width="1491" height="990" extended-state="1" />
+    <frame x="204" y="172" width="1491" height="990" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24982794" />
@@ -168,8 +170,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="113" column="42" lean-forward="true" selection-start-line="113" selection-start-column="42" selection-end-line="113" selection-end-column="42" />
+        <state relative-caret-position="814">
+          <caret line="86" column="42" lean-forward="true" selection-start-line="86" selection-start-column="42" selection-end-line="86" selection-end-column="42" />
+          <folding>
+            <element signature="e#502#519#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
