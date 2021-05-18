@@ -102,7 +102,7 @@ class MyAI(AI):
     def addQueue(self, b: int, X: int, Y: int):
         # add top left
         if self.inBound(self.X-1, self.Y+1):
-            tile = (self.X - 1) * 10 + (self.Y + 1)
+            tile = (self.X-1) * 10 + (self.Y+1)
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -116,7 +116,7 @@ class MyAI(AI):
 
         # add middle left
         if self.inBound(self.X-1, self.Y):
-            tile = (self.X - 1) * 10 + (self.Y)
+            tile = (self.X-1) * 10 + self.Y
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -130,7 +130,7 @@ class MyAI(AI):
 
         # add bottom left
         if self.inBound(self.X-1, self.Y-1):
-            tile = (self.X - 1) * 10 + (self.Y-1)
+            tile = (self.X-1) * 10 + (self.Y-1)
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -144,7 +144,7 @@ class MyAI(AI):
 
         # add center top
         if self.inBound(self.X, self.Y+1):
-            tile = (self.X) * 10 + (self.Y + 1)
+            tile = self.X * 10 + (self.Y+1)
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -158,7 +158,7 @@ class MyAI(AI):
 
         # add center bottom
         if self.inBound(self.X, self.Y-1):
-            tile = (self.X) * 10 + (self.Y - 1)
+            tile = self.X * 10 + (self.Y-1)
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -172,7 +172,7 @@ class MyAI(AI):
 
         # add top right
         if self.inBound(self.X+1, self.Y+1):
-            tile = (self.X + 1) * 10 + (self.Y + 1)
+            tile = (self.X+1) * 10 + (self.Y+1)
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -186,7 +186,7 @@ class MyAI(AI):
 
         # add middle right
         if self.inBound(self.X+1, self.Y):
-            tile = (self.X + 1) * 10 + (self.Y)
+            tile = (self.X+1) * 10 + self.Y
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
@@ -200,7 +200,7 @@ class MyAI(AI):
 
         # add bottom right
         if self.inBound(self.X+1, self.Y-1):
-            tile = (self.X + 1) * 10 + (self.Y - 1)
+            tile = (self.X+1) * 10 + (self.Y-1)
             if tile not in self.uncovered:
                 if b == 0:
                     if tile in self.minefield:
