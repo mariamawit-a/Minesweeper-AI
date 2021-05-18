@@ -47,9 +47,9 @@ class MyAI(AI):
         self.board = [[-1 for i in range(rowDimension)]
                       for j in range(colDimension)]
 
-        for col in self.board: #sets every tile to default, covered state as per model checking
-            for thing in col:
-                thing = Tile(-2, 0, 0)
+        for col in self.board: # sets every tile to default, covered state as per model checking
+            for tile in col:
+                tile = Tile(-2, 0, 0)
 
         self.move = 0
         self.uncovered = []
@@ -213,8 +213,8 @@ class MyAI(AI):
                         if tile not in self.minefield:
                             self.minefield.append(tile)
 
-    #removes the item with the smallest number of adjacent uncovered, numbered tiles from minefield (this is also
-    #removed on the board in the function that calles it (this part must change->should be done here))
+    # removes the item with the smallest number of adjacent uncovered, numbered tiles from minefield (this is also
+    # removed on the board in the function that calles it (this part must change->should be done here))
     def minMinefield(self) -> int:
         minOnes = 9
         for item in self.minefield:
@@ -224,7 +224,7 @@ class MyAI(AI):
         self.minefield.remove(minItem)
         return minItem
 
-    #finds the number of adjacent numbered tiles to a covered tile
+    # finds the number of adjacent numbered tiles to a covered tile
     def numOnes(self, item: int) -> int:
         counter = 0
         tileX = item//10
@@ -246,7 +246,7 @@ class MyAI(AI):
     def mMark(self):
         return
 
-    #returns the effective label of a tile given its coordinates in the board. returns -1 if the label of the tile
+    # returns the effective label of a tile given its coordinates in the board. returns -1 if the label of the tile
     # is not numbered or not uncovered (basically, any value less than or equal to 0)
     # BE AWARE: also sets the value in effectiveLabel in the tile to this value
     def effectiveLabel(self, X: int, Y: int) -> int:
@@ -258,12 +258,12 @@ class MyAI(AI):
         tile.effectivelabel = eflabel
         return eflabel
 
-    #returns the number of adjacent unmarked, covered tiles as stored in the tile
+    # returns the number of adjacent unmarked, covered tiles as stored in the tile
     def getAdjacentUnmarked(self, X: int, Y: int) -> int:
         return (self.board[X][Y]).adjacentUnmarked
 
-    #calculates the number of adjacent unmarked, covered tiles around the given tile coordinates
-    #returns NOTHING
+    # calculates the number of adjacent unmarked, covered tiles around the given tile coordinates
+    # returns NOTHING
     def setAdjacentUnmarked(self, X: int, Y: int):
         counter = 0
 
@@ -271,7 +271,7 @@ class MyAI(AI):
         if self.inBound(self.X-1, self.Y+1):
             if (self.board[X-1][Y+1]).state == -2:
                 counter += 1
-                #tile = (self.X - 1) * 10 + (self.Y + 1)
+                # tile = (self.X - 1) * 10 + (self.Y + 1)
         # consider middle left
         if self.inBound(self.X-1, self.Y):
             if (self.board[X-1][Y]).state == -2:
@@ -294,7 +294,7 @@ class MyAI(AI):
         if self.inBound(self.X+1, self.Y+1):
             if (self.board[X+1][Y+1]).state == -2:
                 counter += 1
-         # consider middle right
+        # consider middle right
         if self.inBound(self.X+1, self.Y):
             if (self.board[X+1][Y]).state == -2:
                 counter += 1
@@ -305,7 +305,7 @@ class MyAI(AI):
 
         (self.board[X][Y]).adjacentUnmarked = counter
 
-    #returns the number of adjacent marked tiles
+    # returns the number of adjacent marked tiles
     def getAdjacentMarked(self, X: int, Y: int) -> int:
         counter = 0
 
