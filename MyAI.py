@@ -40,9 +40,9 @@ class MyAI(AI):
         self.board = [[-1 for i in range(rowDimension)]
                       for j in range(colDimension)]
 
-        #for col in self.board: #sets every tile to default, covered state as per model checking
-        #    for row in col:
-        #        row = Tile(-2, 0, 0)
+        for col in self.board: #sets every tile to default, covered state as per model checking
+            for row in col:
+                row = "-2:0:0"
 
         self.move = 0
         self.uncovered = []
@@ -232,4 +232,6 @@ class MyAI(AI):
             if -1 <= thisX <= 1 and -1 <= thisY <= 1:
                 counter += 1
         return counter
+
+
 
