@@ -259,6 +259,7 @@ class MyAI(AI):
         return eflabel
 
     # calculates the number of adjacent unmarked, covered tiles around the given tile coordinates
+    # BE AWARE: also sets the effective label in the tile struct
     # returns the number of adjacent unmarked
     def getAdjacentUnmarked(self, X: int, Y: int):
         counter = 0
