@@ -27,8 +27,19 @@ class MyAI(AI):
         self.startY = startY
         self.X = startX
         self.Y = startY
+
+        class Tile: #this is each tile on the local board
+            state: int #-2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
+            effectivelabel: int
+            adjacentUnmarked: int
+
         self.board = [[-1 for i in range(rowDimension)]
                       for j in range(colDimension)]
+
+        for col in self.board: #sets every tile to default, covered state
+            for row in col:
+                row = Tile(-2, 0, 0)
+
         self.move = 0
         self.uncovered = []
         self.uncoveredOnes = []
@@ -191,6 +202,8 @@ class MyAI(AI):
                         if tile not in self.minefield:
                             self.minefield.append(tile)
 
+    #removes the item with the smallest number of adjacent uncovered, numbered tiles from minefield (this is also
+    #removed on the board in the function that calles it (this part must change->should be done here))
     def minMinefield(self) -> int:
         minOnes = 9
         for item in self.minefield:
@@ -200,6 +213,7 @@ class MyAI(AI):
         self.minefield.remove(minItem)
         return minItem
 
+    #finds the number of adjacent numbered tiles to a covered tile
     def numOnes(self, item: int) -> int:
         counter = 0
         tileX = item//10
@@ -214,3 +228,24 @@ class MyAI(AI):
             if -1 <= thisX <= 1 and -1 <= thisY <= 1:
                 counter += 1
         return counter
+
+    #used to uncover a tile both in the locally held map and on the host board
+    def mUncover(self):
+        return
+
+    #used to mark a tile both in the locally held map and on the host board
+    def mMark(self):
+        return
+
+    #handles the neighbors (of a newly uncovered tile) by ??????
+    def handleNeighbors(self, tile):
+        return
+
+    #calculates the effective label given the label. calls other methods to find the adjacent marked tiles
+    def makeEffectiveLabel(self, label: int):
+        return label - self.getAdjacentMarked()
+
+    #gets the number of adjacent marked tiles
+    def getAdjacentMarked(self):
+        return
+
