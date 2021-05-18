@@ -14,7 +14,6 @@
 
 from AI import AI
 from Action import Action
-#import struct
 
 
 class Tile(object):  # this is each tile on the local board
@@ -249,102 +248,101 @@ class MyAI(AI):
     # returns the effective label of a tile given its coordinates in the board. returns -1 if the label of the tile
     # is not numbered or not uncovered (basically, any value less than or equal to 0)
     # BE AWARE: also sets the value in effectiveLabel in the tile to this value
-    def effectiveLabel(self, X: int, Y: int) -> int:
-        tile = self.board[X][Y]
+    def effectiveLabel(self, x: int, y: int) -> int:
+        tile = self.board[x][y]
         num = tile.state
         if num < 1:
             return -1
-        self.setAdjacentUnmarked(X, Y) # in order to make sure it is up to date when we use the adjacent unmarked field
-        eflabel = num - self.getAdjacentUnmarked(X, Y)
+        self.setAdjacentUnmarked(x, y)  # in order to make sure it is up to date when we use the adjacent unmarked field
+        eflabel = num - self.getAdjacentUnmarked(x, y)
         tile.effectivelabel = eflabel
         return eflabel
 
     # returns the number of adjacent unmarked/covered tiles as stored in the tile
-    def getAdjacentUnmarked(self, X: int, Y: int) -> int:
-        return (self.board[X][Y]).adjacentUnmarked
+    def getAdjacentUnmarked(self, x: int, y: int) -> int:
+        return (self.board[x][y]).adjacentUnmarked
 
     # calculates the number of adjacent unmarked/covered tiles around the given tile coordinates
     # sets the adjacent unmarked in the tile struct
     # returns NOTHING
-    def setAdjacentUnmarked(self, X: int, Y: int):
+    def setAdjacentUnmarked(self, x: int, y: int):
         counter = 0
 
         # consider top left
-        if self.inBound(self.X-1, self.Y+1):
-            if (self.board[X-1][Y+1]).state == -2:
+        if self.inBound(x-1, y+1):
+            if (self.board[x-1][y+1]).state == -2:
                 counter += 1
-                # tile = (self.X - 1) * 10 + (self.Y + 1)
         # consider middle left
-        if self.inBound(self.X-1, self.Y):
-            if (self.board[X-1][Y]).state == -2:
+        if self.inBound(x-1, y):
+            if (self.board[x-1][y]).state == -2:
                 counter += 1
         # consider bottom left
-        if self.inBound(self.X-1, self.Y-1):
-            if (self.board[X-1][Y-1]).state == -2:
+        if self.inBound(x-1, y-1):
+            if (self.board[x-1][y-1]).state == -2:
                 counter += 1
 
         # consider center top
-        if self.inBound(self.X, self.Y+1):
-            if (self.board[X][Y+1]).state == -2:
+        if self.inBound(x, y+1):
+            if (self.board[x][y+1]).state == -2:
                 counter += 1
         # consider center bottom
-        if self.inBound(self.X, self.Y-1):
-            if (self.board[X][Y-1]).state == -2:
+        if self.inBound(x, y-1):
+            if (self.board[x][y-1]).state == -2:
                 counter += 1
 
         # consider top right
-        if self.inBound(self.X+1, self.Y+1):
-            if (self.board[X+1][Y+1]).state == -2:
+        if self.inBound(x+1, y+1):
+            if (self.board[x+1][y+1]).state == -2:
                 counter += 1
         # consider middle right
-        if self.inBound(self.X+1, self.Y):
-            if (self.board[X+1][Y]).state == -2:
+        if self.inBound(x+1, y):
+            if (self.board[x+1][y]).state == -2:
                 counter += 1
         # consider bottom right
-        if self.inBound(self.X+1, self.Y-1):
-            if (self.board[X+1][Y-1]).state == -2:
+        if self.inBound(x+1, y-1):
+            if (self.board[x+1][y-1]).state == -2:
                 counter += 1
 
-        (self.board[X][Y]).adjacentUnmarked = counter
+        (self.board[y][x]).adjacentUnmarked = counter
 
     # returns the number of adjacent marked tiles
-    def getAdjacentMarked(self, X: int, Y: int) -> int:
+    def getAdjacentMarked(self, x: int, y: int) -> int:
         counter = 0
 
         # consider top left
-        if self.inBound(self.X - 1, self.Y + 1):
-            if (self.board[X - 1][Y + 1]).state == -1:
+        if self.inBound(x-1, y+1):
+            if (self.board[x-1][y+1]).state == -1:
                 counter += 1
                 # tile = (self.X - 1) * 10 + (self.Y + 1)
         # consider middle left
-        if self.inBound(self.X - 1, self.Y):
-            if (self.board[X - 1][Y]).state == -1:
+        if self.inBound(x-1, y):
+            if (self.board[x-1][y]).state == -1:
                 counter += 1
         # consider bottom left
-        if self.inBound(self.X - 1, self.Y - 1):
-            if (self.board[X - 1][Y - 1]).state == -1:
+        if self.inBound(x-1, y-1):
+            if (self.board[x-1][y-1]).state == -1:
                 counter += 1
 
         # consider center top
-        if self.inBound(self.X, self.Y + 1):
-            if (self.board[X][Y + 1]).state == -1:
+        if self.inBound(x, y+1):
+            if (self.board[x][y+1]).state == -1:
                 counter += 1
         # consider center bottom
-        if self.inBound(self.X, self.Y - 1):
-            if (self.board[X][Y - 1]).state == -1:
+        if self.inBound(x, y-1):
+            if (self.board[x][y-1]).state == -1:
                 counter += 1
 
         # consider top right
-        if self.inBound(self.X + 1, self.Y + 1):
-            if (self.board[X + 1][Y + 1]).state == -1:
+        if self.inBound(x+1, y+1):
+            if (self.board[x+1][y+1]).state == -1:
                 counter += 1
         # consider middle right
-        if self.inBound(self.X + 1, self.Y):
-            if (self.board[X + 1][Y]).state == -1:
+        if self.inBound(x+1, y):
+            if (self.board[x+1][y]).state == -1:
                 counter += 1
         # consider bottom right
-        if self.inBound(self.X + 1, self.Y - 1):
-            if (self.board[X + 1][Y - 1]).state == -1:
+        if self.inBound(x+1, y-1):
+            if (self.board[x+1][y-1]).state == -1:
                 counter += 1
 
         return counter
