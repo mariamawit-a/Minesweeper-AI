@@ -16,10 +16,12 @@ from AI import AI
 from Action import Action
 
 
+class Tile(object):  # this is each tile on the local board
+    __slots__ = ["state", "effectivelabel", "adjacentUnmarked"] # -2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
+
+
 class MyAI(AI):
 
-    #class Tile(object):  # this is each tile on the local board
-    #    __slots__ = ["state", "effectivelabel", "adjacentUnmarked"] # -2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
 
     def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
 
@@ -42,7 +44,8 @@ class MyAI(AI):
 
         for col in self.board: #sets every tile to default, covered state as per model checking
             for row in col:
-                row = "-2:0:0"
+                row = Tile(-2,0,0)
+                #row = "-2:0:0"
 
         self.move = 0
         self.uncovered = []
