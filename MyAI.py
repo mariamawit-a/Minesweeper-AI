@@ -258,13 +258,9 @@ class MyAI(AI):
         tile.effectivelabel = eflabel
         return eflabel
 
-    # returns the number of adjacent unmarked, covered tiles as stored in the tile
-    def getAdjacentUnmarked(self, X: int, Y: int) -> int:
-        return (self.board[X][Y]).adjacentUnmarked
-
     # calculates the number of adjacent unmarked, covered tiles around the given tile coordinates
-    # returns NOTHING
-    def setAdjacentUnmarked(self, X: int, Y: int):
+    # returns the number of adjacent unmarked
+    def getAdjacentUnmarked(self, X: int, Y: int):
         counter = 0
 
         # consider top left
@@ -304,6 +300,7 @@ class MyAI(AI):
                 counter += 1
 
         (self.board[X][Y]).adjacentUnmarked = counter
+        return counter
 
     # returns the number of adjacent marked tiles
     def getAdjacentMarked(self, X: int, Y: int) -> int:
