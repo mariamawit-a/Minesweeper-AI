@@ -14,14 +14,19 @@
 
 from AI import AI
 from Action import Action
+#import struct
 
 
 class Tile(object):  # this is each tile on the local board
-    __slots__ = ["state", "effectivelabel", "adjacentUnmarked"] # -2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
+    #__slots__ = ['state', 'effectivelabel', 'adjacentUnmarked'] # -2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
+
+    def __init__(self, state, effectivelabel, adjacentUnmarked):
+        self.state = state
+        self.effectivelabel = effectivelabel
+        self.adjacentUnmarked = adjacentUnmarked
 
 
 class MyAI(AI):
-
 
     def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
 
@@ -43,9 +48,8 @@ class MyAI(AI):
                       for j in range(colDimension)]
 
         for col in self.board: #sets every tile to default, covered state as per model checking
-            for row in col:
-                row = Tile(-2,0,0)
-                #row = "-2:0:0"
+            for thing in col:
+                thing = Tile(-2, 0, 0)
 
         self.move = 0
         self.uncovered = []
@@ -112,7 +116,7 @@ class MyAI(AI):
                             self.minefield.append(tile)
 
         # add middle left
-        if self.inBound(self.X-1, self.Y+1):
+        if self.inBound(self.X-1, self.Y):
             tile = (self.X - 1) * 10 + (self.Y)
             if tile not in self.uncovered:
                 if b == 0:
@@ -234,6 +238,110 @@ class MyAI(AI):
 
             if -1 <= thisX <= 1 and -1 <= thisY <= 1:
                 counter += 1
+        return counter
+
+    def mUncover(self):
+        return
+
+    def mMark(self):
+        return
+
+    #returns the effective label of a tile given its coordinates in the board. returns -1 if the label of the tile
+    # is not numbered or not uncovered (basically, any value less than or equal to 0)
+    # BE AWARE: also sets the value in effectiveLabel in the tile to this value
+    def effectiveLabel(self, X: int, Y: int) -> int:
+        tile = self.board[X][Y]
+        num = tile.state
+        if num < 1:
+            return -1
+        eflabel = num - self.getAdjacentUnmarked(X, Y)
+        tile.effectivelabel = eflabel
+        return eflabel
+
+    #returns the number of adjacent unmarked, covered tiles
+    # BE AWARE: also sets the value in adjacent unmarked of the tile struct to the value it finds
+    def getAdjacentUnmarked(self, X: int, Y: int) -> int:
+        counter = 0
+
+        # consider top left
+        if self.inBound(self.X-1, self.Y+1):
+            if (self.board[X-1][Y+1]).state == -2:
+                counter += 1
+                #tile = (self.X - 1) * 10 + (self.Y + 1)
+        # consider middle left
+        if self.inBound(self.X-1, self.Y):
+            if (self.board[X-1][Y]).state == -2:
+                counter += 1
+        # consider bottom left
+        if self.inBound(self.X-1, self.Y-1):
+            if (self.board[X-1][Y-1]).state == -2:
+                counter += 1
+
+        # consider center top
+        if self.inBound(self.X, self.Y+1):
+            if (self.board[X][Y+1]).state == -2:
+                counter += 1
+        # consider center bottom
+        if self.inBound(self.X, self.Y-1):
+            if (self.board[X][Y-1]).state == -2:
+                counter += 1
+
+        # consider top right
+        if self.inBound(self.X+1, self.Y+1):
+            if (self.board[X+1][Y+1]).state == -2:
+                counter += 1
+         # consider middle right
+        if self.inBound(self.X+1, self.Y):
+            if (self.board[X+1][Y]).state == -2:
+                counter += 1
+        # consider bottom right
+        if self.inBound(self.X+1, self.Y-1):
+            if (self.board[X+1][Y-1]).state == -2:
+                counter += 1
+
+        (self.board[X][Y]).adjacentUnmarked = counter
+        return counter
+
+    #returns the number of adjacent marked tiles
+    def getAdjacentMarked(self, X: int, Y: int) -> int:
+        counter = 0
+
+        # consider top left
+        if self.inBound(self.X - 1, self.Y + 1):
+            if (self.board[X - 1][Y + 1]).state == -1:
+                counter += 1
+                # tile = (self.X - 1) * 10 + (self.Y + 1)
+        # consider middle left
+        if self.inBound(self.X - 1, self.Y):
+            if (self.board[X - 1][Y]).state == -1:
+                counter += 1
+        # consider bottom left
+        if self.inBound(self.X - 1, self.Y - 1):
+            if (self.board[X - 1][Y - 1]).state == -1:
+                counter += 1
+
+        # consider center top
+        if self.inBound(self.X, self.Y + 1):
+            if (self.board[X][Y + 1]).state == -1:
+                counter += 1
+        # consider center bottom
+        if self.inBound(self.X, self.Y - 1):
+            if (self.board[X][Y - 1]).state == -1:
+                counter += 1
+
+        # consider top right
+        if self.inBound(self.X + 1, self.Y + 1):
+            if (self.board[X + 1][Y + 1]).state == -1:
+                counter += 1
+        # consider middle right
+        if self.inBound(self.X + 1, self.Y):
+            if (self.board[X + 1][Y]).state == -1:
+                counter += 1
+        # consider bottom right
+        if self.inBound(self.X + 1, self.Y - 1):
+            if (self.board[X + 1][Y - 1]).state == -1:
+                counter += 1
+
         return counter
 
 
