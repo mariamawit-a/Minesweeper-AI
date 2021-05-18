@@ -18,6 +18,9 @@ from Action import Action
 
 class MyAI(AI):
 
+    #class Tile(object):  # this is each tile on the local board
+    #    __slots__ = ["state", "effectivelabel", "adjacentUnmarked"] # -2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
+
     def __init__(self, rowDimension, colDimension, totalMines, startX, startY):
 
         self.rowDimension = rowDimension
@@ -28,17 +31,18 @@ class MyAI(AI):
         self.X = startX
         self.Y = startY
 
-        class Tile: #this is each tile on the local board
-            state: int #-2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
-            effectivelabel: int
-            adjacentUnmarked: int
+        #class Tile(object):
+        #    def __init__(self, state, effectivelabel, adjacentUnmarked):
+        #        self.state = state
+        #        self.effectivelabel = effectivelabel
+        #        self.adjacentUnmarked = adjacentUnmarked
 
         self.board = [[-1 for i in range(rowDimension)]
                       for j in range(colDimension)]
 
-        for col in self.board: #sets every tile to default, covered state
-            for row in col:
-                row = Tile(-2, 0, 0)
+        #for col in self.board: #sets every tile to default, covered state as per model checking
+        #    for row in col:
+        #        row = Tile(-2, 0, 0)
 
         self.move = 0
         self.uncovered = []
@@ -228,24 +232,4 @@ class MyAI(AI):
             if -1 <= thisX <= 1 and -1 <= thisY <= 1:
                 counter += 1
         return counter
-
-    #used to uncover a tile both in the locally held map and on the host board
-    def mUncover(self):
-        return
-
-    #used to mark a tile both in the locally held map and on the host board
-    def mMark(self):
-        return
-
-    #handles the neighbors (of a newly uncovered tile) by ??????
-    def handleNeighbors(self, tile):
-        return
-
-    #calculates the effective label given the label. calls other methods to find the adjacent marked tiles
-    def makeEffectiveLabel(self, label: int):
-        return label - self.getAdjacentMarked()
-
-    #gets the number of adjacent marked tiles
-    def getAdjacentMarked(self):
-        return
 
