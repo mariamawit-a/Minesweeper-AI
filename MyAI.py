@@ -253,12 +253,13 @@ class MyAI(AI):
         num = tile.state
         if num < 1:
             return -1
-        self.setAdjacentUnmarked(x, y)  # in order to make sure it is up to date when we use the adjacent unmarked field
-        eflabel = num - self.getAdjacentUnmarked(x, y)
+        #self.setAdjacentUnmarked(x, y)  # in order to make sure it is up to date when we use the adjacent unmarked field
+        eflabel = num - self.getAdjacentMarked(x, y)
         tile.effectivelabel = eflabel
         return eflabel
 
     # returns the number of adjacent unmarked/covered tiles as stored in the tile
+    # should always call setAdjacentUnmarked before calling this, though only once and not every time you call this in the same scope
     def getAdjacentUnmarked(self, x: int, y: int) -> int:
         return (self.board[x][y]).adjacentUnmarked
 
