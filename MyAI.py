@@ -239,9 +239,11 @@ class MyAI(AI):
                 counter += 1
         return counter
 
+    # a simple function that does the uncover for both the local and remote boards
     def mUncover(self):
         return
 
+    # a simple function that does mark for both the local and remote boards
     def mMark(self):
         return
 
