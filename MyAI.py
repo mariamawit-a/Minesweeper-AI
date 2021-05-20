@@ -350,7 +350,7 @@ class MyAI(AI):
 
         return counter
 
-    #counts number of items in coveredFrontier
+    # counts number of items in coveredFrontier
     def countCovered(self) -> int:
         count = 0
         for thing in self.minefield:
