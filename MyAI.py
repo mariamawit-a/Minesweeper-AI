@@ -391,7 +391,7 @@ class MyAI(AI):
     def getAdjacent(self, coords: list) -> int:
         tile = self.board[coords[0]][coords[1]]
         splitstr = tile.split(":")
-        return int(splitstr[1])
+        return int(splitstr[2])
 
     # changes the label of the tile at the given coords
     def setLabel(self, coords: list, label: int):
@@ -410,4 +410,3 @@ class MyAI(AI):
         tile = self.board[coords[0]][coords[1]]
         splitstr = tile.split(":")
         self.board[coords[0]][coords[1]] = splitstr[0] + ":" + splitstr[1] + ":" + str(adjacent)
-        

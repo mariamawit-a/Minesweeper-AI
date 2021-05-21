@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9c17c33-08d5-45d2-9dd7-4f9f9b9d9227" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyAI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1013">
-              <caret line="412" column="8" selection-start-line="412" selection-start-column="8" selection-end-line="412" selection-end-column="8" />
+            <state relative-caret-position="792">
+              <caret line="393" column="29" selection-start-line="393" selection-start-column="29" selection-end-line="393" selection-end-column="29" />
               <folding>
                 <element signature="e#502#519#0" expanded="true" />
               </folding>
@@ -165,8 +164,8 @@
     <entry file="file://$PROJECT_DIR$/../../../Desktop/Minesweeper-AI/MyAI.py" />
     <entry file="file://$PROJECT_DIR$/MyAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1013">
-          <caret line="412" column="8" selection-start-line="412" selection-start-column="8" selection-end-line="412" selection-end-column="8" />
+        <state relative-caret-position="792">
+          <caret line="393" column="29" selection-start-line="393" selection-start-column="29" selection-end-line="393" selection-end-column="29" />
           <folding>
             <element signature="e#502#519#0" expanded="true" />
           </folding>
