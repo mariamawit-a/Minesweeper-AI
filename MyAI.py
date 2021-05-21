@@ -14,15 +14,16 @@
 
 from AI import AI
 from Action import Action
+import string
 
 
-class Tile(object):  # this is each tile on the local board
+#class Tile(object):  # this is each tile on the local board
     #__slots__ = ['state', 'effectivelabel', 'adjacentUnmarked'] # -2 for covered/unmarked, -1 for marked(mine), 0->infinity for uncovered label
-
-    def __init__(self, state, effectivelabel, adjacentUnmarked):
-        self.state = state
-        self.effectivelabel = effectivelabel
-        self.adjacentUnmarked = adjacentUnmarked
+#
+#    def __init__(self, state, effectivelabel, adjacentUnmarked):
+#        self.state = state
+#        self.effectivelabel = effectivelabel
+#        self.adjacentUnmarked = adjacentUnmarked
 
 
 class MyAI(AI):
@@ -279,8 +280,8 @@ class MyAI(AI):
 
     # returns the number of adjacent unmarked/covered tiles as stored in the tile
     # should always call setAdjacentUnmarked before calling this, though only once and not every time you call this in the same scope
-    def getAdjacentUnmarked(self, x: int, y: int) -> int:
-        return (self.board[x][y]).adjacentUnmarked
+    #def getAdjacentUnmarked(self, x: int, y: int) -> int:
+    #    return (self.board[x][y]).adjacentUnmarked
 
     # calculates the number of adjacent unmarked/covered tiles around the given tile coordinates
     # sets the adjacent unmarked in the tile struct
@@ -373,3 +374,40 @@ class MyAI(AI):
         for thing in self.minefield:
             count += 1
         return count
+
+    # gets the label from the string
+    def getLabel(self, coords: list) -> int:
+        tile = self.board[coords[0]][coords[1]]
+        splitstr = tile.split(":")
+        return int(splitstr[0])
+
+    # gets the effective label
+    def getEffectiveLabel(self, coords: list) -> int:
+        tile = self.board[coords[0]][coords[1]]
+        splitstr = tile.split(":")
+        return int(splitstr[1])
+
+    # gets the # of adjacent/covered/unmarked tiles
+    def getAdjacent(self, coords: list) -> int:
+        tile = self.board[coords[0]][coords[1]]
+        splitstr = tile.split(":")
+        return int(splitstr[1])
+
+    # changes the label of the tile at the given coords
+    def setLabel(self, coords: list, label: int):
+        tile = self.board[coords[0]][coords[1]]
+        splitstr = tile.split(":")
+        self.board[coords[0]][coords[1]] = str(label) + ":" + splitstr[1] + ":" + splitstr[2]
+
+    # changes the effective label of the tile at the given coords
+    def setEffectiveLabel(self, coords: list, eflabel: int):
+        tile = self.board[coords[0]][coords[1]]
+        splitstr = tile.split(":")
+        self.board[coords[0]][coords[1]] = splitstr[0] + ":" + str(eflabel) + ":" + splitstr[2]
+
+    # changes the # of adjacent of the tile at the given coords
+    def setAdjacent(self, coords: list, adjacent: int):
+        tile = self.board[coords[0]][coords[1]]
+        splitstr = tile.split(":")
+        self.board[coords[0]][coords[1]] = splitstr[0] + ":" + splitstr[1] + ":" + str(adjacent)
+        
