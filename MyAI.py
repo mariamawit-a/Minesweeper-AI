@@ -27,8 +27,37 @@ class MyAI(AI):
         self.startY = startY
         self.X = startX
         self.Y = startY
-        self.board = [[-1 for i in range(rowDimension)]
-                      for j in range(colDimension)]
+
+        self.board = []
+        for r in range(rowDimension):
+            row = []
+            for c in range(colDimension):
+                state = "*"
+                effectiveLabel = " "
+                adjacentUnmarked = 0
+
+                if self.inBound(r-1, c-1):
+                    adjacentUnmarked += 1
+                if self.inBound(r-1, c):
+                    adjacentUnmarked += 1
+                if self.inBound(r-1, c+1):
+                    adjacentUnmarked += 1
+                if self.inBound(r, c-1):
+                    adjacentUnmarked += 1
+                if self.inBound(r, c+1):
+                    adjacentUnmarked += 1
+                if self.inBound(r+1, c-1):
+                    adjacentUnmarked += 1
+                if self.inBound(r+1, c):
+                    adjacentUnmarked += 1
+                if self.inBound(r+1, c+1):
+                    adjacentUnmarked += 1
+
+                tile = state+":"+effectiveLabel+":"+str(adjacentUnmarked)
+                row.append(tile)
+
+            self.board.append(row)
+
         self.move = 0
         self.uncovered = []
         self.uncoveredOnes = []
