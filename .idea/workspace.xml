@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d9c17c33-08d5-45d2-9dd7-4f9f9b9d9227" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyAI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyAI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="387" column="22" selection-start-line="387" selection-start-column="22" selection-end-line="387" selection-end-column="22" />
+            <state relative-caret-position="1968">
+              <caret line="525" column="24" lean-forward="true" selection-start-line="525" selection-start-column="24" selection-end-line="525" selection-end-column="24" />
               <folding>
                 <element signature="e#510#527#0" expanded="true" />
               </folding>
@@ -50,6 +49,7 @@
       <find>isInB</find>
       <find>numO</find>
       <find>minMine</find>
+      <find>trying to</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -188,8 +188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyAI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="387" column="22" selection-start-line="387" selection-start-column="22" selection-end-line="387" selection-end-column="22" />
+        <state relative-caret-position="1968">
+          <caret line="525" column="24" lean-forward="true" selection-start-line="525" selection-start-column="24" selection-end-line="525" selection-end-column="24" />
           <folding>
             <element signature="e#510#527#0" expanded="true" />
           </folding>
