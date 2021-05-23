@@ -530,9 +530,16 @@ class MyAI(AI):
                         break
                 #print("Finish adding noMines from MC")
             else:
-                print("taking a guess")
-                max_index = sumindex.index(max_value)
-                self.addnoMines(self.LocalcoveredFrontier[max_index])
+                if self.LocalcoveredFrontier == self.coveredFrontier:
+                    print("taking a guess")
+                    max_index = sumindex.index(max_value)
+                    self.addnoMines(self.LocalcoveredFrontier[max_index])
+
+                else:
+                    self.LocalcoveredFrontier = self.coveredFrontier
+                    #uncovered_difference = [item for item in self.uncoveredFrontier if item not in self.LocaluncoveredFrontier]
+                    self.LocaluncoveredFrontier = self.uncoveredFrontier
+                    return self.modelCheck()
 
 
         if self.noMines:
