@@ -407,51 +407,49 @@ class MyAI(AI):
         #permutations = self.generate()
         #self.copyBoard = np.copy(self.board)
 
-        while not self.noMines:
+        self.uncoveredFrontierEffective = []
+        for tile in self.LocaluncoveredFrontier:
+            self.uncoveredFrontierEffective.append(self.getEffective(tile, 0))
 
+        possible = []
+        print("about to iterate permutations \n")
+
+        n = len(self.LocalcoveredFrontier)
+        A = [-1, 0]
+        index_of = {x: i for i, x in enumerate(A)}
+        s = [A[0]] * n
+        while True:
+            p = list(s)
+            # print("trying permutation ", p)
+            for i in range(len(self.LocalcoveredFrontier)):
+                if p[i] == -1:
+                    c = self.LocalcoveredFrontier[i]
+                    #self.setState(c, -1, 1)
+                    if self.actionOnNeighbors(6, c) == False:
+                        break
+
+            #         print("set bomb on ", self.coveredFrontier[i])
+
+            # print('\n'.join([''.join(['{:8}'.format(item) for item in row]) for row in self.copyBoard]))
+            # print("\n")
+            if self.isValidPermutation():
+                possible.append(p)
+                #print(p, " is a possible permutation")
+
+            #self.copyBoard = np.copy(self.board)
             self.uncoveredFrontierEffective = []
             for tile in self.LocaluncoveredFrontier:
-                self.uncoveredFrontierEffective.append(self.getEffective(tile, 0))
+                self.uncoveredFrontierEffective.append(
+                    self.getEffective(tile, 0))
 
-            possible = []
-            print("about to iterate permutations \n")
-
-            n = len(self.LocalcoveredFrontier)
-            A = [-1, 0]
-            index_of = {x: i for i, x in enumerate(A)}
-            s = [A[0]] * n
-            while True:
-                p = list(s)
-                # print("trying permutation ", p)
-                for i in range(len(self.LocalcoveredFrontier)):
-                    if p[i] == -1:
-                        c = self.LocalcoveredFrontier[i]
-                        #self.setState(c, -1, 1)
-                        if self.actionOnNeighbors(6, c) == False:
-                            break
-
-                #         print("set bomb on ", self.coveredFrontier[i])
-
-                # print('\n'.join([''.join(['{:8}'.format(item) for item in row]) for row in self.copyBoard]))
-                # print("\n")
-                if self.isValidPermutation():
-                    possible.append(p)
-                    #print(p, " is a possible permutation")
-
-                #self.copyBoard = np.copy(self.board)
-                self.uncoveredFrontierEffective = []
-                for tile in self.LocaluncoveredFrontier:
-                    self.uncoveredFrontierEffective.append(
-                        self.getEffective(tile, 0))
-
-                for i in range(1, n + 1):
-                    if s[-i] == A[-1]:  # Last letter of alphabet, can not increment
-                        s[-i] = A[0]
-                    else:
-                        s[-i] = A[index_of[s[-i]] + 1]  # Modify to next letter
-                        break
+            for i in range(1, n + 1):
+                if s[-i] == A[-1]:  # Last letter of alphabet, can not increment
+                    s[-i] = A[0]
                 else:
+                    s[-i] = A[index_of[s[-i]] + 1]  # Modify to next letter
                     break
+            else:
+                break
 
         # for p in permutations:
         #     # print("trying permutation ", p)
