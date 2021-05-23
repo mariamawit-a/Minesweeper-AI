@@ -4,7 +4,7 @@
 # AUTHOR: 		Justin Chung
 #
 # DESCRIPTION:	This file contains the Action class. This class stores
-#				action (from the Action Enum in AI.py) and the coordindates
+#				action (from the Action Enum in AI.py) and the coordinates
 #				of the action.
 #
 # NOTES: 		- DO NOT MAKE CHANGES TO THIS FILE.
