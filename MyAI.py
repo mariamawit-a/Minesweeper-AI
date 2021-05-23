@@ -525,5 +525,5 @@ class MyAI(AI):
             print("no mines, ", self.noMines, "\n")
             return Action(AI.Action.UNCOVER, self.X, self.Y)
 
-        else:
+        elif not self.noMines:
             self.modelCheck()
