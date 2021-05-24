@@ -14,7 +14,7 @@
 
 from AI import AI
 from Action import Action
-
+from random import randint
 
 
 class MyAI(AI):
@@ -54,12 +54,13 @@ class MyAI(AI):
                 if self.inBound([c+1, r+1]):
                     adjacentUnmarked += 1
 
+                tile = str(state)+":"+str(effectiveLabel) + \
                     ":"+str(adjacentUnmarked)
                 row.append(tile)
 
             self.board.append(row)
 
-        self.move = 0
+        self.move = 1
         self.uncoveredFrontier = []
         self.uncoveredFrontierEffective = []
         self.coveredFrontier = []
@@ -76,12 +77,13 @@ class MyAI(AI):
         self.setEffective([self.X, self.Y], self.getEffective(
             [self.X, self.Y], 0) + number, 0)
         self.actionOnNeighbors(2, [self.X, self.Y])
-        ##print('\n'.join([''.join(['{:8}'.format(item) for item in row]) for row in self.board]))
+        #print('\n'.join([''.join(['{:8}'.format(item) for item in row]) for row in self.board]))
 
-        ##print("79 uncovered ", number, " on X: ", self.X, " Y: ", self.Y)
-        # input("Press Enter to continue...")
+        #print("79 uncovered ", number, " on X: ", self.X, " Y: ", self.Y)
+        #input("Press Enter to continue...")
         ##print("\n")
 
+        # all left is no mines
         if self.uncoverAllFlag:
             if self.noMines:
                 #print("85 uncovering all within noMines ",self.noMines,"\n")
@@ -93,6 +95,10 @@ class MyAI(AI):
                 return Action(AI.Action.UNCOVER, self.X, self.Y)
             else:
                 return Action(AI.Action.LEAVE)
+
+        #all left is mine
+        if self.move == self.rowDimension*self.colDimension-self.totalMines:
+            return Action(AI.Action.LEAVE)
 
         elif number == 0:
             self.actionOnNeighbors(0, [self.X, self.Y])
@@ -121,7 +127,7 @@ class MyAI(AI):
 
         if self.uncoverAllFlag:
             if self.noMines:
-                ###print("122 uncovering all within noMines ",self.noMines,"\n")
+                #print("122 uncovering all within noMines ",self.noMines,"\n")
                 tile = self.noMines.pop(0)
                 self.X = tile[0]
                 self.Y = tile[1]
@@ -159,23 +165,19 @@ class MyAI(AI):
                     if currentLengthCovered == 0:
                         currentLengthCovered += 0
 
-                    self.actionOnNeighbors(
-                        7, self.LocalcoveredFrontier[currentLengthCovered-1])
+                    self.actionOnNeighbors(7, self.LocalcoveredFrontier[currentLengthCovered-1])
 
                     while len(self.LocaluncoveredFrontier) > currentLengthUncovered:
-                        self.actionOnNeighbors(
-                            8, self.LocaluncoveredFrontier[currentLengthUncovered-1])
+                        self.actionOnNeighbors(8, self.LocaluncoveredFrontier[currentLengthUncovered-1])
 
                         currentLengthUncovered += 1
 
                     currentLengthCovered += 1
 
-            covered_difference = [item.copy(
-            ) for item in self.coveredFrontier if item not in self.LocalcoveredFrontier]
+            covered_difference = [item.copy() for item in self.coveredFrontier if item not in self.LocalcoveredFrontier]
             if 0 < len(covered_difference) < len(self.LocalcoveredFrontier):
                 self.LocalcoveredFrontier = covered_difference
-                uncovered_difference = [item.copy(
-                ) for item in self.uncoveredFrontier if item not in self.LocaluncoveredFrontier]
+                uncovered_difference = [item.copy() for item in self.uncoveredFrontier if item not in self.LocaluncoveredFrontier]
                 self.LocaluncoveredFrontier = uncovered_difference
 
             ###print("Localuncovered frontier", self.LocaluncoveredFrontier, "\n")
@@ -237,8 +239,7 @@ class MyAI(AI):
 
                 if b == 2:  # called after action of uncovering a tile
 
-                    self.setAdjacent(
-                        neighbor, self.getAdjacent(neighbor, 0) - 1, 0)
+                    self.setAdjacent(neighbor, self.getAdjacent(neighbor, 0) - 1, 0)
 
                 if b == 3:  # called by NeighborsSafe
 
@@ -314,9 +315,9 @@ class MyAI(AI):
 
             ###print("\n")
 
-            if self.totalMines == len(self.mines):
-                ###print("306 uncoverall called \n")
-                self.uncoverAll()
+        if self.totalMines == len(self.mines):
+            #print("306 uncoverall called \n")
+            self.uncoverAll()
 
     def setState(self, cord: list, state: int, type: int):
         cord1 = self.rowDimension - cord[1] - 1
@@ -406,7 +407,6 @@ class MyAI(AI):
     def modelCheck(self):
         #print("405 in model check \n")
         self.recursion += 1
-        #permutations = self.generate()
 
         self.uncoveredFrontierEffective = []
         for tile in self.LocaluncoveredFrontier:
@@ -416,6 +416,10 @@ class MyAI(AI):
         #print("415 about to iterate permutations \n")
 
         n = len(self.LocalcoveredFrontier)
+
+        if n == 0:
+            return Action(AI.Action.LEAVE)
+
         A = [-1, 0]
         index_of = {x: i for i, x in enumerate(A)}
         s = [A[0]] * n
@@ -434,7 +438,7 @@ class MyAI(AI):
            # ###print("effective is ", self.uncoveredFrontierEffective)
             if all([v == 0 for v in self.uncoveredFrontierEffective]):
                 possible.append(p)
-                ##print(p, " is a possible permutation")
+                #print(p, " is a possible permutation")
 
             self.uncoveredFrontierEffective = []
             ####print("440 local uncovered frontier", self.LocaluncoveredFrontier)
@@ -452,18 +456,13 @@ class MyAI(AI):
                 break
 
         if(len(possible) == 0):
-            ##print("nothing is possible")
-            ##print("guess")
+            #print("nothing is possible")
+            # print("guess")
+            #input("c")
             r = randint(0, len(self.coveredFrontier)-1)
-            ##print("guess index", r)
-            #input("cont")
+            self.move += 1
             return Action(AI.Action.UNCOVER, self.coveredFrontier[r][0], self.coveredFrontier[r][1])
-            # covered_difference = [item.copy() for item in self.coveredFrontier if item not in self.LocalcoveredFrontier]
-            # ##print("changing frontier from ", self.LocalcoveredFrontier, " to ", covered_difference)
-            # self.LocalcoveredFrontier = covered_difference
-            # uncovered_difference = [item.copy() for item in self.uncoveredFrontier if item not in self.LocaluncoveredFrontier]
-            # self.LocaluncoveredFrontier = uncovered_difference
-            # return self.modelCheck()
+
         mineadded = False
         if len(possible) == 1:
             ###print("477 possible is just 1 ", possible[0])
@@ -488,7 +487,7 @@ class MyAI(AI):
             max_value = max(sumindex)
             min_value = min(sumindex)
 
-            ##print("max value", max_value)
+            #print("max value", max_value)
             if max_value == 0:
                 for index in range(len(self.LocalcoveredFrontier)):
                     if sumindex[index] == 0:
@@ -496,7 +495,7 @@ class MyAI(AI):
                         ##print("494 adding ", self.LocalcoveredFrontier[index], "into no mine after model checking")
                         self.addnoMines(self.LocalcoveredFrontier[index])
                         ###print("496 added ", self.LocalcoveredFrontier[index], "into no mine after model checking")
-                        if len(self.LocalcoveredFrontier) != len(self.coveredFrontier):
+                        if len(self.LocalcoveredFrontier) < len(self.coveredFrontier) - 5:
                             break
                 ###print("Finish adding noMines from MC")
             elif min_value == len(possible)*-1:
@@ -512,11 +511,10 @@ class MyAI(AI):
                 ###print("Finish adding noMines from MC")
             elif(len(possible) > 0):
                 #if len(self.LocalcoveredFrontier) == len(self.coveredFrontier):
-                ##print("taking a guess")
+                #print("taking a guess")
                 occurrence = sumindex.count(max_value)
-                guess_index = [i for i, n in enumerate(
-                    sumindex) if n == max_value][randint(0, occurrence-1)]
-                ##print("guess index", guess_index)
+                guess_index = [i for i, n in enumerate(sumindex) if n == max_value][randint(0, occurrence-1)]
+                #print("guess index", guess_index)
                 #input("cont")
                 self.addnoMines(self.LocalcoveredFrontier[guess_index])
 
@@ -532,6 +530,7 @@ class MyAI(AI):
             self.X = tile[0]
             self.Y = tile[1]
             ###print("trying to uncover X: 545", self.X, " Y: ", self.Y)
+            self.move += 1
             self.recursion = 0
             return Action(AI.Action.UNCOVER, self.X, self.Y)
 
@@ -562,6 +561,7 @@ class MyAI(AI):
                 r = randint(0, len(self.coveredFrontier)-1)
                 ##print("guess index", r)
                 #input("cont")
+                self.move += 1
                 return Action(AI.Action.UNCOVER, self.coveredFrontier[r][0], self.coveredFrontier[r][1])
             elif mineadded == True:
                 mineadded = False
