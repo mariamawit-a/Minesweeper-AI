@@ -18,7 +18,7 @@
 #						-m Use ManualAI instead of MyAI.
 #						-r Use RandomAI instead of MyAI.
 #						-f [InputPath] [OutputFile]
-#						   First is absolute path to Minesweeper World file or 
+#						   First is absolute path to Minesweeper World file or
 #						   directory containing Minesweeper World files.
 #						   Second is the file name of the .txt file you wish
 #						   to write your results to.
@@ -30,7 +30,7 @@
 #						-h Displays help menu and quits.
 #
 #				- The default AI type is MyAI.
-#				
+#
 #				- When using -f, the [OutputFile] should only be used when
 #				  [InputPath] is a folder of world files. If not, then
 #				  [OutputPath] is useless.
@@ -63,7 +63,7 @@ def main():
 	parser.add_argument("-d", "-D", help="enable debug mode", action="store_true")				# Debug
 
 	args = parser.parse_args()
-	
+
 	inputFile = None
 	outputFile = None
 	filepath = args.f
@@ -119,7 +119,7 @@ def main():
 
 					numScores += 1
 					sumScores += score
-					
+
 			print("---------------Your agent's results:---------------")
 			print("Beginner: {} \tIntermediate: {} \tExpert: {}".format(scoreBeg, scoreInt, scoreExp))
 			print("Cumulative Score: " + str(sumScores))
@@ -158,7 +158,7 @@ def main():
 			print("WORLD INCOMPLETE")
 		else:
 			print("WORLD COMPLETE")
-		
+
 
 if __name__ == "__main__":
 	main()
