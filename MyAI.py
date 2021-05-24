@@ -14,9 +14,6 @@
 
 from AI import AI
 from Action import Action
-from random import gauss, randint
-#import numpy as np
-import signal
 
 
 
